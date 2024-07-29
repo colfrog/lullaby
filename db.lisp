@@ -4,7 +4,12 @@
 (defvar *db* (sqlite:connect *db-path*))
 
 (defun init (&optional username password)
-  (uiop:run-program (list "sqlite3" *db-path* "--load" "schema.sql"))
+  (let* ((schema (open "schema.sql"))
+	 (statements (split-sequence:split-sequence #\; (uiop:read-file-string schema))))
+    (dolist (statement statements)
+      (when (not (equal (string-trim '(#\space #\newline) statement) ""))
+	(sqlite:execute-non-query *db* statement)))
+    (close schema))
   (when (and username password)
     (make-user username password)))
 

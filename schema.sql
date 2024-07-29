@@ -53,4 +53,4 @@ CREATE TABLE auth (
        auth_id TEXT PRIMARY KEY, -- Session ID made from md5(password%epoch)
        user_id INTEGER,
        auth_expires DATETIME
-)
+);
