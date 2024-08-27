@@ -1,3 +1,3 @@
 (defpackage lullaby
-  (:use #:cl)
-  (:export #:start #:init))
+  (:use #:cl #:cl-who #:hunchentoot)
+  (:export #:start-lullaby #:init))

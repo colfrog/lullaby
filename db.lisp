@@ -23,3 +23,6 @@
 
 (defun make-user (username password)
   (sqlite:execute-single *db* "INSERT INTO users (user_id, user_name, user_password_hash) SELECT max(user_id) + 1, ?, ? FROM users" username (get-md5 password)))
+
+(defun get-user (username)
+  (sqlite:execute-single *db* "SELECT * FROM users WHERE user_name = ?" username))
