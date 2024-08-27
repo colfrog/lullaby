@@ -7,10 +7,6 @@
 
 (defun credentials-valid (username password)
   (let ((pass-md5 (sqlite:execute-single *db* "SELECT user_password_hash FROM users WHERE user_name = ?" username)))
-    (print username)
-    (print password)
-    (print pass-md5)
-    (print (get-md5 password))
     (when pass-md5 (equal (get-md5 password) pass-md5))))
 
 (define-easy-handler (login-page :uri "/login")
